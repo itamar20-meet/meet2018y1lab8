@@ -108,7 +108,7 @@ turtle.onkeypress(down, DOWN_ARROW)
 turtle.listen()
 #3. Do the same for the other arrow keys
 ####WRITE YOUR CODE HERE!!
-
+food = turtle.clone()
 def make_food():
     #The screen positions go from -SIZE/2 to +SIZE/2
     #But we need to make food pieces only appear on game squares
@@ -123,9 +123,9 @@ def make_food():
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
 
     food.goto(food_x,food_y)
-    food_pos.append(food_x,food_y)
-    random_food_stamp = food.stamp()
-    food_stamps.append(random_food_stamp)
+    food_pos.append((food_x,food_y))
+    stamp_id = food.stamp()
+    food_stamps.append(stamp_id)
 
     
     ##1.WRITE YOUR CODE HERE: Make the food turtle go to the randomly-generated
@@ -217,7 +217,7 @@ def move_snake():
     old_stamp = stamp_list.pop(0)
     snake.clearstamp(old_stamp)
     pos_list.pop(0)
-    if len(food_stamps)<-6:
+    if len(food_stamps)<=6:
         make_food()
     turtle.ontimer(move_snake,TIME_STEP)
 move_snake()
